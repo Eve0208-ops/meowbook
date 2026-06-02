@@ -288,7 +288,7 @@ function renderList() {
   if (records.length === 0) {
     el.innerHTML = `
       <div class="empty-state">
-        <img src="icons/cat-sleep.svg" alt="" />
+        <div style="font-size:64px;margin-bottom:8px">💤</div>
         <p>还没有记录喵～</p>
         <p>去"记一笔"开始吧</p>
       </div>`;
