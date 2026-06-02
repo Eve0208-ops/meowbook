@@ -1,5 +1,5 @@
-// 暹罗记账 Service Worker — 让 App 可离线使用
-const CACHE = 'meowbook-v1';
+// 秋秋记账 Service Worker — 让 App 可离线使用
+const CACHE = 'qiuqiu-v2';
 const ASSETS = [
   './',
   './index.html',
