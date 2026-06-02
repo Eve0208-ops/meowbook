@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#f5ead8" />
+  <title>暹罗记账 · MeowBook</title>
+
+  <!-- iOS PWA 关键标签 -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="暹罗记账" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" type="image/svg+xml" href="icons/cat.svg" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- 图表库 Chart.js（轻量、CDN加载） -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+  <!-- 顶部栏 -->
+  <header class="topbar">
+    <div class="logo">
+      <img src="icons/cat.svg" alt="暹罗猫" class="logo-cat" />
+      <span>暹罗记账</span>
+    </div>
+  </header>
+
+  <!-- 主体 -->
+  <main id="app">
+
+    <!-- 标签切换 -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="add">记一笔</button>
+      <button class="tab" data-tab="stats">统计</button>
+      <button class="tab" data-tab="list">明细</button>
+    </nav>
+
+    <!-- ============ 记一笔 ============ -->
+    <section id="tab-add" class="tab-panel active">
+      <div class="card">
+        <label class="amount-label">花了多少</label>
+        <div class="amount-input-wrap">
+          <span class="currency">¥</span>
+          <input id="amountInput" type="text" inputmode="decimal" placeholder="0.00" />
+        </div>
+
+        <label class="section-label">用途</label>
+        <div class="cat-grid" id="categoryGrid">
+          <!-- 由 JS 渲染 -->
+        </div>
+
+        <label class="section-label">备注（可选）</label>
+        <input id="noteInput" type="text" placeholder="例如：午饭、猫粮…" />
+
+        <label class="section-label">日期</label>
+        <input id="dateInput" type="date" />
+
+        <button id="saveBtn" class="primary-btn">
+          <span>记下来 🐾</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ 统计 ============ -->
+    <section id="tab-stats" class="tab-panel">
+      <div class="card">
+        <div class="range-switch" id="rangeSwitch">
+          <button class="range-btn active" data-range="day">日</button>
+          <button class="range-btn" data-range="week">周</button>
+          <button class="range-btn" data-range="month">月</button>
+          <button class="range-btn" data-range="year">年</button>
+        </div>
+
+        <div class="period-nav">
+          <button id="prevPeriod">‹</button>
+          <span id="periodLabel">—</span>
+          <button id="nextPeriod">›</button>
+        </div>
+
+        <div class="total-box">
+          <div class="total-label">本期总支出</div>
+          <div class="total-amount" id="totalAmount">¥0.00</div>
+        </div>
+
+        <div class="chart-wrap">
+          <canvas id="pieChart"></canvas>
+        </div>
+
+        <div class="category-list" id="categoryList">
+          <!-- 各分类占比 -->
+        </div>
+
+        <div class="chart-wrap" style="margin-top:20px">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 明细 ============ -->
+    <section id="tab-list" class="tab-panel">
+      <div class="card">
+        <h3 class="section-label" style="margin-top:0">最近记录</h3>
+        <div id="recordList" class="record-list">
+          <!-- 由 JS 渲染 -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 保存成功提示 -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+  <script>
+    // 注册 Service Worker（让 App 可离线、可装到主屏幕）
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(()=>{});
+      });
+    }
+  </script>
+</body>
+</html>

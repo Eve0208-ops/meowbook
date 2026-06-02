@@ -1,0 +1,16 @@
+{
+  "name": "暹罗记账 MeowBook",
+  "short_name": "暹罗记账",
+  "description": "可爱的暹罗猫主题记账小工具",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fdf7ec",
+  "theme_color": "#f5ead8",
+  "icons": [
+    { "src": "icons/icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/cat.svg",      "sizes": "any",     "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
