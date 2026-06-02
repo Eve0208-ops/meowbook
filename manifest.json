@@ -1,7 +1,7 @@
 {
-  "name": "暹罗记账 MeowBook",
-  "short_name": "暹罗记账",
-  "description": "可爱的暹罗猫主题记账小工具",
+  "name": "秋秋记账",
+  "short_name": "秋秋记账",
+  "description": "秋秋的暹罗猫主题记账小工具",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
