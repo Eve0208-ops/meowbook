@@ -1,5 +1,5 @@
 // 秋秋记账 Service Worker — 让 App 可离线使用
-const CACHE = 'qiuqiu-v3';
+const CACHE = 'qiuqiu-v4';
 const ASSETS = [
   './',
   './index.html',
@@ -9,6 +9,7 @@ const ASSETS = [
   './icons/icon-180.png',
   './icons/icon-192.png',
   './icons/icon-512.png',
+  './icons/pets_combined.png',
   'https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js',
 ];
 
