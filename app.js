@@ -5,21 +5,35 @@
 
 // ---------- 分类定义 ----------
 const CATEGORIES = [
-  { id: 'food',    name: '吃饭',    emoji: '🍚', color: '#e8896b' },
-  { id: 'pet',     name: '宠物',    emoji: '🐱', color: '#6ab0d8' },
-  { id: 'travel',  name: '出行',    emoji: '🚗', color: '#b48a5e' },
-  { id: 'home',    name: '衣服家居', emoji: '👕', color: '#a07ab5' },
-  { id: 'fun',     name: '娱乐',    emoji: '🎮', color: '#f0b840' },
-  { id: 'social',  name: '社交',    emoji: '🎉', color: '#7bb47b' },
+  { id: 'food',      name: '吃饭',     emoji: '🍚', color: '#e8896b' },
+  { id: 'pet',       name: '宠物',     emoji: '🐱', color: '#6ab0d8' },
+  { id: 'travel',    name: '出行',     emoji: '🚗', color: '#b48a5e' },
+  { id: 'home',      name: '衣服家居', emoji: '👕', color: '#a07ab5' },
+  { id: 'entertain', name: '社交娱乐', emoji: '🎉', color: '#f0b840' },
+  { id: 'medical',   name: '医疗',     emoji: '💊', color: '#7bb47b' },
 ];
 const CAT_MAP = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
+// 旧数据兼容：老记录里的 fun/social 都映射到 entertain
+CAT_MAP['fun']    = CAT_MAP['entertain'];
+CAT_MAP['social'] = CAT_MAP['entertain'];
 
 // ---------- 存储 ----------
 const STORE_KEY = 'meowbook_records_v1';
 
 function loadRecords() {
-  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || []; }
-  catch { return []; }
+  try {
+    const list = JSON.parse(localStorage.getItem(STORE_KEY)) || [];
+    // 旧分类迁移：fun/social → entertain
+    let migrated = false;
+    list.forEach(r => {
+      if (r.category === 'fun' || r.category === 'social') {
+        r.category = 'entertain';
+        migrated = true;
+      }
+    });
+    if (migrated) localStorage.setItem(STORE_KEY, JSON.stringify(list));
+    return list;
+  } catch { return []; }
 }
 function saveRecords(list) {
   localStorage.setItem(STORE_KEY, JSON.stringify(list));
