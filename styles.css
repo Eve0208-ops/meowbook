@@ -275,6 +275,21 @@ input, button { font-family: inherit; }
 .empty-state img { width: 120px; opacity: 0.85; margin-bottom: 12px; }
 .empty-state p { font-size: 14px; margin: 4px 0; }
 
+/* ============ 底部装饰 ============ */
+.pets-decor {
+  margin-top: 24px;
+  text-align: center;
+  opacity: 0.95;
+  pointer-events: none;
+}
+.pets-decor img {
+  max-width: 80%;
+  max-height: 180px;
+  width: auto;
+  height: auto;
+  display: inline-block;
+}
+
 /* ============ Toast ============ */
 .toast {
   position: fixed;
